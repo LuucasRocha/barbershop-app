@@ -27,6 +27,46 @@
         "7": {
             "nome": "Relaxamento Capilar",
             "preco": 50
+        },
+        "8": {
+            "nome": "Pigmentação Capilar",
+            "preco": 60
+        },
+        "9": {
+            "nome": "Alinhamento de Barba",
+            "preco": 20
+        },
+        "10": {
+            "nome": "Corte Máquina (1 a 4)",
+            "preco": 25
+        },
+        "11": {
+            "nome": "Corte Infantil",
+            "preco": 30
+        },
+        "12": {
+            "nome": "Platinado",
+            "preco": 120
+        },
+        "13": {
+            "nome": "Luzes Masculinas",
+            "preco": 90
+        },
+        "14": {
+            "nome": "Selagem Capilar",
+            "preco": 80
+        },
+        "15": {
+            "nome": "Escova Modeladora",
+            "preco": 25
+        },
+        "16": {
+            "nome": "Shampoo + Massagem",
+            "preco": 20
+        },
+        "17": {
+            "nome": "Tratamento Anticaspa",
+            "preco": 35
         }
     },
     "agendamentos": {}
