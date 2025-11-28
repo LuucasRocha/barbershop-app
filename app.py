@@ -66,6 +66,43 @@ def agendar_servico():
         "agendamento": info
     }), 200
 
+@app.route('/api/cancelarAgendamento', methods=['POST'])
+def cancelar_agendamento():
+    if not request.is_json:
+        return jsonify({"erro": "O corpo da requisição deve ser JSON"}), 400
+
+    dados = request.get_json()
+    agendamento_id = dados.get("id")
+
+    if not agendamento_id:
+        return jsonify({"erro": "ID do agendamento é obrigatório"}), 400
+
+    tb_agend = db_barbearia.table("agendamentos")
+
+    agendamento = tb_agend.get(consulta.id == agendamento_id)
+
+    if not agendamento:
+        return jsonify({"erro": "Agendamento não encontrado"}), 404
+
+    # Remove do banco
+    tb_agend.remove(consulta.id == agendamento_id)
+
+    # Remove da fila
+    itens_temporarios = []
+    while not fila_agendamentos.empty():
+        item = fila_agendamentos.get()
+        if item.get("id") != agendamento_id:
+            itens_temporarios.append(item)
+
+    # Retorna itens para fila
+    for item in itens_temporarios:
+        fila_agendamentos.put(item)
+
+    return jsonify({
+        "mensagem": "Agendamento cancelado com sucesso",
+        "agendamento_cancelado": agendamento
+    }), 200
+
 
 if __name__ == '__main__':
     app.run(debug=True)
