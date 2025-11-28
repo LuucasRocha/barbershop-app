@@ -5,12 +5,8 @@ from filaAgendamentos import fila_agendamentos
 
 app = Flask(__name__)
 
-# Banco instanciado uma vez
-db_barbearia = TinyDB('banco.json')
-
-# Query centralizada
+db_barbearia = TinyDB('banco.json', indent=4) 
 consulta = Query()
-
 
 @app.route('/api/pesquisaServico', methods=['POST'])
 def pesquisa_servico():
@@ -20,10 +16,8 @@ def pesquisa_servico():
     dados_requisicao = request.get_json()
     tb_servicos = db_barbearia.table('servicos')
 
-    # Lista completa
     todos_servicos = tb_servicos.all()
 
-    # Pesquisa simples
     termo = dados_requisicao.get("servico")
     if termo:
         encontrados = tb_servicos.search(
@@ -35,7 +29,7 @@ def pesquisa_servico():
             "servicos_encontrados": encontrados
         }), 200
 
-    # Sem termo de busca → mostra tudo
+ 
     return jsonify({
         "quantidade": len(todos_servicos),
         "lista": todos_servicos
@@ -49,22 +43,22 @@ def agendar_servico():
 
     info = request.get_json()
 
-    # Validação simples (não foge do estilo)
+    # Validação
     if "cliente" not in info or "servico" not in info:
         return jsonify({"erro": "Dados incompletos"}), 400
 
-    # Carimbo de data
+    # Registra a data/hora atual automaticamente
     info["data"] = datetime.now().isoformat()
 
+    # Abre a tabela de agendamentos
     tb_agend = db_barbearia.table("agendamentos")
 
     # ID simples
     info["id"] = len(tb_agend.all()) + 1
 
-    # Salva no banco
+    #Salva no banco
     tb_agend.insert(info)
 
-    # Enfileira
     fila_agendamentos.put(info)
 
     return jsonify({
