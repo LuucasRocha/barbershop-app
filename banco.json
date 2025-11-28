@@ -1,0 +1,35 @@
+{
+    "servicos": {
+        "1": {
+            "nome": "Corte Masculino",
+            "preco": 35,
+            "descricao": "Corte tradicional com finalização."
+        },
+        "2": {
+            "nome": "Barba Completa",
+            "preco": 25,
+            "descricao": "Aparar, alinhar e hidratar."
+        },
+        "3": {
+            "nome": "Corte + Barba",
+            "preco": 50,
+            "descricao": "Combinação completa de corte e barba."
+        },
+        "4": {
+            "nome": "Sobrancelha Masculina",
+            "preco": 15,
+            "descricao": "Limpeza e alinhamento natural."
+        },
+        "5": {
+            "nome": "Hidratação Capilar",
+            "preco": 30,
+            "descricao": "Tratamento para brilho e maciez."
+        },
+        "6": {
+            "nome": "Barboterapia",
+            "preco": 40,
+            "descricao": "Toalha quente, massagem facial e cuidados com a barba."
+        }
+    },
+    "agendamentos": {}
+}
