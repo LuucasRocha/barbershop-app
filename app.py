@@ -56,7 +56,6 @@ def agendar_servico():
     # ID simples
     info["id"] = len(tb_agend.all()) + 1
 
-    #Salva no banco
     tb_agend.insert(info)
 
     fila_agendamentos.put(info)
